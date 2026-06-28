@@ -19,9 +19,10 @@ import { LOGO_SRC } from './LogoMark';
 
 const SESSION_KEY = 'frady-pixel-played';
 const RES_H = 512; // offscreen sampling height
-const DURATION = 1700; // ms for the full materialization
-const FADE = 0.16; // per-block fade-in fraction of the timeline
-const ACCENT = '#7c9a76';
+const DURATION = 1300; // ms for the full materialization
+const FADE = 0.22; // per-block fade-in fraction of the timeline
+
+const easeOut = (p: number) => 1 - Math.pow(1 - p, 3);
 
 let playedThisLoad = false;
 
@@ -118,8 +119,10 @@ export function PixelLogo({
       data = null; // tainted (shouldn't happen same-origin) — skip ink test
     }
 
-    // Build the grid of "ink" blocks (skip transparent areas).
-    const block = Math.max(4, Math.round(h / 42));
+    // Build the grid of "ink" blocks (skip transparent areas). Finer grain +
+    // a left-to-right reveal order (with a little jitter) reads cleaner and
+    // more intentional than a random scatter.
+    const block = Math.max(3, Math.round(h / 64));
     const scale = offH / h;
     type Blk = { x: number; y: number; sx: number; sy: number; ss: number; start: number };
     const blocks: Blk[] = [];
@@ -133,14 +136,9 @@ export function PixelLogo({
           const alpha = data[(cy * offW + cx) * 4 + 3];
           if (alpha < 40) continue; // transparent -> not part of the word
         }
-        blocks.push({
-          x,
-          y,
-          sx,
-          sy,
-          ss: Math.ceil(block * scale),
-          start: Math.random() * (1 - FADE), // scatter across the timeline
-        });
+        const bias = (x / w) * (1 - FADE) * 0.8; // sweep left -> right
+        const jitter = Math.random() * (1 - FADE) * 0.2; // soft organic edge
+        blocks.push({ x, y, sx, sy, ss: Math.ceil(block * scale), start: bias + jitter });
       }
     }
 
@@ -153,13 +151,20 @@ export function PixelLogo({
       for (const b of blocks) {
         const local = Math.min(Math.max((t - b.start) / FADE, 0), 1);
         if (local <= 0) continue;
-        ctx.globalAlpha = local;
+        ctx.globalAlpha = easeOut(local);
         ctx.drawImage(off, b.sx, b.sy, b.ss, b.ss, b.x, b.y, block, block);
-        if (local < 1) {
-          ctx.globalAlpha = (1 - local) * 0.75;
-          ctx.fillStyle = ACCENT;
-          ctx.fillRect(b.x, b.y, block, block);
-        }
+      }
+      // A soft white scan-line travelling with the reveal frontier — subtle
+      // "digital" cue without any color noise.
+      if (t < 1) {
+        const fx = t * w;
+        const grad = ctx.createLinearGradient(fx - 36, 0, fx + 12, 0);
+        grad.addColorStop(0, 'rgba(244,241,234,0)');
+        grad.addColorStop(0.7, 'rgba(244,241,234,0.18)');
+        grad.addColorStop(1, 'rgba(244,241,234,0)');
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = grad;
+        ctx.fillRect(fx - 36, 0, 48, h);
       }
       ctx.globalAlpha = 1;
       if (t < 1) {
