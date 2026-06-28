@@ -95,3 +95,10 @@ select p.id, v.* from (values
        total_monthly_recurring, amount_paid_to_date, outstanding_balance, payment_status, contract_status)
 join public.projects p on p.slug = v.slug
 on conflict (project_id) do nothing;
+
+-- --- GitHub repo URLs ------------------------------------------------------
+-- Link every project to its GitHub repo (derived from slug). Mirrors the
+-- derivation in src/data/projects.ts. Set repo_url explicitly above to override.
+update public.projects
+   set repo_url = 'https://github.com/cfrady5/' || slug
+ where repo_url is null;

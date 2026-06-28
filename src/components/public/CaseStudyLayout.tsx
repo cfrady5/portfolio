@@ -68,6 +68,11 @@ export function CaseStudyLayout({ project, nextProject }: CaseStudyLayoutProps) 
                 Visit live site ↗
               </Button>
             )}
+            {project.repo_url && (
+              <Button href={project.repo_url} external variant="secondary" size="md">
+                View code ↗
+              </Button>
+            )}
             <Button href="/contact" variant="secondary" size="md">
               Work with me
             </Button>
@@ -79,7 +84,7 @@ export function CaseStudyLayout({ project, nextProject }: CaseStudyLayoutProps) 
             title={project.title}
             accent={project.accent_color}
             category={project.category}
-            liveUrl={project.live_url}
+            liveUrl={project.live_url ?? project.repo_url}
           />
         </div>
       </header>
@@ -174,7 +179,7 @@ export function CaseStudyLayout({ project, nextProject }: CaseStudyLayoutProps) 
                 title={project.title}
                 accent={project.accent_color}
                 category={project.category}
-                liveUrl={project.live_url}
+                liveUrl={project.live_url ?? project.repo_url}
               />
             ))}
           </div>

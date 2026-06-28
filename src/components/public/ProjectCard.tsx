@@ -18,7 +18,7 @@ export function ProjectCard({ project }: { project: Project }) {
           title={project.title}
           accent={project.accent_color}
           category={project.category}
-          liveUrl={project.live_url}
+          liveUrl={project.live_url ?? project.repo_url}
         />
       </div>
 
@@ -71,6 +71,16 @@ export function ProjectCard({ project }: { project: Project }) {
               className="text-sm text-bone-soft transition-colors hover:text-bone focus-ring rounded"
             >
               Live site ↗
+            </a>
+          )}
+          {project.repo_url && (
+            <a
+              href={project.repo_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-bone-soft transition-colors hover:text-bone focus-ring rounded"
+            >
+              Code ↗
             </a>
           )}
         </div>

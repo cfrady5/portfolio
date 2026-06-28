@@ -875,6 +875,24 @@ export const projects: Project[] = [
 ];
 
 // ---------------------------------------------------------------------------
+// GitHub repo URLs.
+// Every project links to its GitHub repository, derived as:
+//   https://github.com/<GH_OWNER>/<slug>
+// These also feed the live screenshot preview when a project has no live_url.
+//
+// >>> If a repo's real name differs from its slug, set `repo_url` explicitly on
+//     that project above (the line is left as `null` so this fills it in). An
+//     explicit value always wins.
+// ---------------------------------------------------------------------------
+export const GH_OWNER = 'cfrady5';
+
+for (const p of projects) {
+  if (!p.repo_url) {
+    p.repo_url = `https://github.com/${GH_OWNER}/${p.slug}`;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Public-safe selectors. These strip private data before it reaches the
 // public site. The data layer (src/data/index.ts) uses these.
 // ---------------------------------------------------------------------------
