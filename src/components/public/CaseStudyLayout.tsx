@@ -79,6 +79,7 @@ export function CaseStudyLayout({ project, nextProject }: CaseStudyLayoutProps) 
             title={project.title}
             accent={project.accent_color}
             category={project.category}
+            liveUrl={project.live_url}
           />
         </div>
       </header>
@@ -173,6 +174,7 @@ export function CaseStudyLayout({ project, nextProject }: CaseStudyLayoutProps) 
                 title={project.title}
                 accent={project.accent_color}
                 category={project.category}
+                liveUrl={project.live_url}
               />
             ))}
           </div>

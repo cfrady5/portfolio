@@ -1,33 +1,38 @@
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { livePreviewUrl } from '@/lib/preview';
+import { LivePreviewImage } from './LivePreviewImage';
 
 interface ProjectMockupProps {
   title: string;
   accent?: string;
-  /** Real screenshot path. When provided, it replaces the placeholder. */
+  /** Real screenshot path (e.g. /projects/foo.png). Takes priority. */
   imageUrl?: string | null;
+  /** Live site URL — used to auto-generate a screenshot preview. */
+  liveUrl?: string | null;
   imageAlt?: string;
   category?: string;
   className?: string;
 }
 
 /**
- * Elegant placeholder "browser window" mockup.
- * - If `imageUrl` is provided (and not a placeholder path), it renders the real
- *   screenshot instead. Drop screenshots in /public/projects and set their path
- *   in the project data / Supabase project_screenshots table to replace these.
+ * Project preview surface in a "browser window" frame.
+ * Layering (top wins, falls back downward):
+ *   1. A real screenshot file in /public/projects (imageUrl), if provided.
+ *   2. An auto-generated live screenshot of liveUrl (see src/lib/preview.ts).
+ *   3. The elegant gradient placeholder mockup.
  */
 export function ProjectMockup({
   title,
   accent = '#7c9a76',
   imageUrl,
+  liveUrl,
   imageAlt,
   category,
   className,
 }: ProjectMockupProps) {
-  // A path under /projects is treated as "may not exist yet" — we still attempt
-  // to load it, but the gradient placeholder sits underneath as a fallback.
-  const hasReal = Boolean(imageUrl);
+  const hasRealFile = Boolean(imageUrl);
+  const previewSrc = hasRealFile ? null : livePreviewUrl(liveUrl);
 
   return (
     <div
@@ -42,11 +47,15 @@ export function ProjectMockup({
         <span className="h-2.5 w-2.5 rounded-full bg-bone/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-bone/15" />
         <span className="ml-3 hidden truncate rounded-md bg-ink-700/80 px-3 py-1 text-[10px] text-bone-soft sm:block">
-          {category ? `${category.toLowerCase().replace(/\s+/g, '')}.frady` : 'frady.studio'}
+          {liveUrl
+            ? liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
+            : category
+              ? `${category.toLowerCase().replace(/\s+/g, '')}.frady`
+              : 'frady.studio'}
         </span>
       </div>
 
-      {/* Gradient placeholder canvas */}
+      {/* Gradient placeholder canvas (always present as the base layer) */}
       <div
         className="absolute inset-0 top-9"
         style={{
@@ -74,8 +83,13 @@ export function ProjectMockup({
         </span>
       </div>
 
-      {/* Real screenshot overlay (if provided) */}
-      {hasReal && (
+      {/* Layer 2: auto-generated live screenshot (hides itself if it fails) */}
+      {previewSrc && (
+        <LivePreviewImage src={previewSrc} alt={imageAlt ?? `${title} live preview`} />
+      )}
+
+      {/* Layer 1: real screenshot file overlay (if provided) */}
+      {hasRealFile && (
         <Image
           src={imageUrl as string}
           alt={imageAlt ?? `${title} screenshot`}

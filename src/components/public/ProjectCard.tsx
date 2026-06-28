@@ -18,6 +18,7 @@ export function ProjectCard({ project }: { project: Project }) {
           title={project.title}
           accent={project.accent_color}
           category={project.category}
+          liveUrl={project.live_url}
         />
       </div>
 
