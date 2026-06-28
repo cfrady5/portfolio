@@ -876,18 +876,34 @@ export const projects: Project[] = [
 
 // ---------------------------------------------------------------------------
 // GitHub repo URLs.
-// Every project links to its GitHub repository, derived as:
-//   https://github.com/<GH_OWNER>/<slug>
+// Maps each project slug to its REAL repository on github.com/cfrady5.
 // These also feed the live screenshot preview when a project has no live_url.
 //
-// >>> If a repo's real name differs from its slug, set `repo_url` explicitly on
-//     that project above (the line is left as `null` so this fills it in). An
-//     explicit value always wins.
+//   string  -> link to this repo
+//   null    -> no repo (hosted platform / concept) -> keep gradient mockup
+//   (unset) -> fall back to https://github.com/<GH_OWNER>/<slug>
 // ---------------------------------------------------------------------------
 export const GH_OWNER = 'cfrady5';
 
+const REPOS: Record<string, string | null> = {
+  'frames-by-frady': `https://github.com/${GH_OWNER}/frames-by-frady`,
+  'thoy-lawncare': `https://github.com/${GH_OWNER}/THOY-lawncare`,
+  'ari-website-concepts': `https://github.com/${GH_OWNER}/ARI`,
+  'dow-scitechconnect': `https://github.com/${GH_OWNER}/SciTech-Connect`,
+  'ram-rapid-acquisition-model': `https://github.com/${GH_OWNER}/RAM`,
+  'heartland-bioworks': `https://github.com/${GH_OWNER}/HeartlandBioworks`,
+  'bulk': `https://github.com/${GH_OWNER}/bulk`,
+  // No public repo — hosted on a platform or a non-code concept:
+  'bizzabo-event-pages': null, // built on the Bizzabo platform
+  'irc-indiana-research-consortium': null, // brand identity concept
+  'sketchbook-stoic': null, // content system concept
+};
+
 for (const p of projects) {
-  if (!p.repo_url) {
+  const mapped = REPOS[p.slug];
+  if (mapped !== undefined) {
+    p.repo_url = mapped;
+  } else if (!p.repo_url) {
     p.repo_url = `https://github.com/${GH_OWNER}/${p.slug}`;
   }
 }

@@ -97,8 +97,13 @@ join public.projects p on p.slug = v.slug
 on conflict (project_id) do nothing;
 
 -- --- GitHub repo URLs ------------------------------------------------------
--- Link every project to its GitHub repo (derived from slug). Mirrors the
--- derivation in src/data/projects.ts. Set repo_url explicitly above to override.
-update public.projects
-   set repo_url = 'https://github.com/cfrady5/' || slug
- where repo_url is null;
+-- Link each project to its REAL repo on github.com/cfrady5. Mirrors the map
+-- in src/data/projects.ts. Projects without a repo (Bizzabo/IRC/Sketchbook)
+-- are left null so they keep the gradient placeholder.
+update public.projects set repo_url = 'https://github.com/cfrady5/frames-by-frady'   where slug = 'frames-by-frady';
+update public.projects set repo_url = 'https://github.com/cfrady5/THOY-lawncare'      where slug = 'thoy-lawncare';
+update public.projects set repo_url = 'https://github.com/cfrady5/ARI'                where slug = 'ari-website-concepts';
+update public.projects set repo_url = 'https://github.com/cfrady5/SciTech-Connect'    where slug = 'dow-scitechconnect';
+update public.projects set repo_url = 'https://github.com/cfrady5/RAM'                where slug = 'ram-rapid-acquisition-model';
+update public.projects set repo_url = 'https://github.com/cfrady5/HeartlandBioworks'  where slug = 'heartland-bioworks';
+update public.projects set repo_url = 'https://github.com/cfrady5/bulk'               where slug = 'bulk';
