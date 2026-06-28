@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SiteFrame } from '@/components/public/SiteFrame';
+import { BrandIntro } from '@/components/public/BrandIntro';
 import { Hero } from '@/components/public/Hero';
 import { SectionHeading } from '@/components/public/SectionHeading';
 import { ProjectCard } from '@/components/public/ProjectCard';
@@ -34,6 +35,9 @@ export default async function HomePage() {
 
   return (
     <SiteFrame>
+      {/* One-time draw-on intro of the cursive frady mark */}
+      <BrandIntro />
+
       {/* 2. Hero */}
       <Hero />
 
@@ -173,7 +177,7 @@ export default async function HomePage() {
           </p>
           <div className="mt-8 flex items-center justify-center gap-3 text-sm text-bone-soft">
             <span className="h-px w-8 bg-moss/50" />
-            Caleb Frady, Frames by Frady
+            Caleb Frady
             <span className="h-px w-8 bg-moss/50" />
           </div>
           <div className="mt-8">

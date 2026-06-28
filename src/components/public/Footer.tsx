@@ -76,7 +76,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-xs text-bone-soft sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} Caleb Frady · Frames by Frady. All rights reserved.</p>
+          <p>© {year} Caleb Frady. All rights reserved.</p>
           <p className="text-bone-soft/70">Strategy, story, and execution.</p>
         </div>
       </div>

@@ -20,11 +20,11 @@ on conflict (id) do nothing;
 insert into public.projects
   (slug, client_id, title, category, short_description, role, tools, status, live_url, featured, public_visible, year, client_type, problem, result, accent_color, renewal_date)
 values
-  ('frames-by-frady', null, 'Frames by Frady', 'Websites',
-   'A small-business website studio that helps local businesses look trustworthy online, get found, and turn visitors into customers.',
-   'Founder, designer, developer, copywriter', '{Next.js,Vercel,Claude,GitHub,SEO}', 'Active', 'https://framesbyfrady.com', true, true, '2026', 'Studio',
-   'Local businesses often have outdated, templated sites that bury what they do and give visitors no reason to trust them.',
-   'A studio identity that communicates trust in seconds, with a repeatable build process from discovery to launch.', '#7c9a76', null),
+  ('frames-by-frady', null, 'Personal Portfolio', 'Websites',
+   'My personal portfolio and proof-of-work site — a place to show the websites, apps, and brands I have built, many of them with Claude.',
+   'Designer, developer, copywriter', '{Next.js,TypeScript,Tailwind,Supabase,Vercel,Claude}', 'Active', 'https://framesbyfrady.com', true, true, '2026', 'Personal',
+   'I needed one credible home for my work that reads clearly and is easy to keep current.',
+   'A personal site that communicates capability in seconds and makes my work easy to browse.', '#7c9a76', null),
 
   ('thoy-lawncare', '11111111-1111-1111-1111-111111111101', 'THOY Lawncare', 'Local Business',
    'A local lawncare landing page concept with clean service sections, friendly branding, and conversion-focused calls to action.',
@@ -89,3 +89,13 @@ update public.projects set repo_url = 'https://github.com/cfrady5/SciTech-Connec
 update public.projects set repo_url = 'https://github.com/cfrady5/RAM'                where slug = 'ram-rapid-acquisition-model';
 update public.projects set repo_url = 'https://github.com/cfrady5/HeartlandBioworks'  where slug = 'heartland-bioworks';
 update public.projects set repo_url = 'https://github.com/cfrady5/bulk'               where slug = 'bulk';
+
+-- --- Live GitHub Pages URLs ------------------------------------------------
+-- Deployed sites used for the rendered-page screenshot preview. Mirrors the
+-- PAGES map in src/data/projects.ts. Only sets projects without a live_url.
+update public.projects set live_url = 'https://cfrady5.github.io/THOY-lawncare/'    where slug = 'thoy-lawncare'                and live_url is null;
+update public.projects set live_url = 'https://cfrady5.github.io/ARI/'              where slug = 'ari-website-concepts'         and live_url is null;
+update public.projects set live_url = 'https://cfrady5.github.io/SciTech-Connect/'  where slug = 'dow-scitechconnect'           and live_url is null;
+update public.projects set live_url = 'https://cfrady5.github.io/RAM/'              where slug = 'ram-rapid-acquisition-model'  and live_url is null;
+update public.projects set live_url = 'https://cfrady5.github.io/HeartlandBioworks/' where slug = 'heartland-bioworks'          and live_url is null;
+update public.projects set live_url = 'https://cfrady5.github.io/bulk/'             where slug = 'bulk'                         and live_url is null;

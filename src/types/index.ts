@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// Core domain types for Frames by Frady.
+// Core domain types for the Caleb Frady portfolio.
 // These mirror the Supabase schema in /supabase/schema.sql so the app can
 // switch from local fallback data to Supabase cleanly.
 // ---------------------------------------------------------------------------

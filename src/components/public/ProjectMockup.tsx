@@ -51,7 +51,7 @@ export function ProjectMockup({
             ? liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
             : category
               ? `${category.toLowerCase().replace(/\s+/g, '')}.frady`
-              : 'frady.studio'}
+              : 'frady'}
         </span>
       </div>
 

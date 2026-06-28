@@ -7,7 +7,7 @@ import { Button } from '@/components/public/Button';
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Start a project with Frames by Frady. Websites, brand experiences, and digital systems built with clarity.',
+    'Get in touch with Caleb Frady. Websites, brand experiences, and digital systems built with clarity.',
 };
 
 export default function ContactPage() {
@@ -18,7 +18,7 @@ export default function ContactPage() {
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-5">
             <LogoMark size={64} href={null} />
-            <span className="eyebrow">Work with me</span>
+            <span className="eyebrow">Get in touch</span>
             <h1 className="text-4xl font-semibold tracking-tight text-bone sm:text-5xl">
               Let&apos;s build something clear.
             </h1>
@@ -63,14 +63,15 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-2xl border border-moss/20 bg-moss/[0.06] p-6">
-            <p className="text-sm font-medium text-bone">Frames by Frady</p>
+            <p className="text-sm font-medium text-bone">Open to new work</p>
             <p className="mt-2 text-sm leading-relaxed text-bone-soft">
-              A small-business website studio focused on helping you look
-              trustworthy online, get found, and turn visitors into customers.
+              I&apos;m open to freelance projects and full-time roles in web
+              design, development, and digital communications. If you have
+              something in mind, I&apos;d like to hear about it.
             </p>
             <div className="mt-4">
               <Button href="/work" variant="secondary" size="sm">
-                See the studio&apos;s work →
+                See the work →
               </Button>
             </div>
           </div>

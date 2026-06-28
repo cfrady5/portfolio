@@ -64,10 +64,10 @@ export default function AboutPage() {
             work into something people can understand and act on.
           </p>
           <p>
-            Frames by Frady is where that comes together. It&apos;s my studio for
-            building clean, fast, conversion-minded websites and digital systems
-            — many built with Claude — that make organizations easier to
-            understand and easier to trust.
+            This portfolio is where that comes together — a place to show the
+            clean, fast, conversion-minded websites and digital systems
+            I&apos;ve built, many of them with Claude, that make organizations
+            easier to understand and easier to trust.
           </p>
           <p>
             I care deeply about quality, because the work carries my name. I
@@ -80,7 +80,7 @@ export default function AboutPage() {
               See the work
             </Button>
             <Button href="/contact" variant="secondary" size="md">
-              Work with me
+              Get in touch
             </Button>
           </div>
         </div>

@@ -1,7 +1,7 @@
-# Frames by Frady — Portfolio + Private Business Dashboard
+# Caleb Frady — Portfolio + Private Business Dashboard
 
 A premium personal portfolio, proof-of-work gallery, and lightweight business
-operating system for **Caleb Frady / Frames by Frady**.
+operating system for **Caleb Frady**.
 
 Built with **Next.js (App Router) · TypeScript · Tailwind CSS · Supabase**.
 Deployment-ready for **Vercel**.

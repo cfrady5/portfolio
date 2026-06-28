@@ -9,17 +9,17 @@ import { cn } from '@/lib/utils';
 //     LOGO_SRC below to '/brand/frady-logo.png'. That's it — navbar, footer,
 //     login, dashboard sidebar, hero, and contact CTA all read from here.
 // ---------------------------------------------------------------------------
-const LOGO_SRC = '/brand/frady-logo.svg';
+export const LOGO_SRC = '/brand/frady-logo.svg';
 
 interface LogoMarkProps {
   /** Pixel size of the circular mark. */
   size?: number;
-  /** Show the "Frames by Frady" wordmark beside the circle. */
+  /** Show the "Caleb Frady" wordmark beside the circle. */
   withWordmark?: boolean;
   /** Wrap in a link to a destination (defaults to '/'). Pass null to disable. */
   href?: string | null;
   className?: string;
-  /** Wordmark label override. */
+  /** Wordmark sub-label override. */
   label?: string;
 }
 
@@ -28,13 +28,13 @@ export function LogoMark({
   withWordmark = false,
   href = '/',
   className,
-  label = 'Frames by Frady',
+  label = 'Portfolio',
 }: LogoMarkProps) {
   const mark = (
     <span className="inline-flex items-center gap-3">
       <Image
         src={LOGO_SRC}
-        alt="Frady — Frames by Frady logo"
+        alt="Caleb Frady logo"
         width={size}
         height={size}
         priority
@@ -61,7 +61,7 @@ export function LogoMark({
   return (
     <Link
       href={href}
-      aria-label="Frames by Frady — home"
+      aria-label="Caleb Frady — home"
       className={cn('inline-flex focus-ring rounded-full', className)}
     >
       {mark}

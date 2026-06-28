@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og';
 // Open Graph / social preview image, generated at the edge.
 // Mirrors the brand: black field, off-white type, muted green accent.
 export const runtime = 'edge';
-export const alt = 'Caleb Frady — Frames by Frady';
+export const alt = 'Caleb Frady — Portfolio';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -41,7 +41,7 @@ export default function OpenGraphImage() {
             f
           </div>
           <div style={{ fontSize: 28, letterSpacing: 2, color: '#7c9a76' }}>
-            FRAMES BY FRADY
+            CALEB FRADY
           </div>
         </div>
 

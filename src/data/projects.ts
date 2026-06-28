@@ -19,41 +19,41 @@ export const projects: Project[] = [
   {
     id: 'p-frames-by-frady',
     client_id: null,
-    title: 'Frames by Frady',
+    title: 'Personal Portfolio',
     slug: 'frames-by-frady',
     category: 'Websites',
     short_description:
-      'A small-business website studio that helps local businesses look trustworthy online, get found, and turn visitors into customers.',
+      'My personal portfolio and proof-of-work site — a place to show the websites, apps, and brands I have built, many of them with Claude.',
     long_description:
-      'Frames by Frady is my studio — a focused practice for building clean, fast, conversion-minded websites for local and growing businesses. The studio brand exists to prove a simple idea: a website should make an organization easier to understand and easier to trust. Every engagement pairs strategy, story, and execution so the final site does real work, not just look good.',
-    role: 'Founder, designer, developer, copywriter',
-    tools: ['Next.js', 'Vercel', 'Claude', 'GitHub', 'SEO'],
+      'This is my personal portfolio: a fast, minimal site built to show my work clearly and let it speak for itself. It pairs strategy, story, and execution — the same approach I bring to every build — into one place that makes it easy to see what I make and how I think, backed by a private dashboard for managing projects behind the scenes.',
+    role: 'Designer, developer, copywriter',
+    tools: ['Next.js', 'TypeScript', 'Tailwind', 'Supabase', 'Vercel', 'Claude'],
     status: 'Active',
     live_url: 'https://framesbyfrady.com',
     repo_url: null,
     featured: true,
     public_visible: true,
     year: '2026',
-    client_type: 'Studio',
+    client_type: 'Personal',
     problem:
-      'Local businesses often have outdated or templated sites that bury what they do, load slowly, and give visitors no clear reason to trust them. The result is wasted attention and lost leads.',
+      'I needed one credible home for my work — a place that shows the range of what I build, reads clearly to anyone who lands on it, and is easy to keep current as I ship more.',
     process: [
-      'Researched the audience and what makes a local business feel credible online',
-      'Structured a repeatable site framework: clear value, proof, and a single next action',
-      'Designed a premium, minimal interface system that scales across clients',
-      'Wrote conversion-focused copy that earns trust quickly',
-      'Built the studio site and intake flow on Next.js and Vercel',
-      'Prepared a CMS-driven model so client sites are easy to maintain',
+      'Defined what the work should say about how I think and build',
+      'Structured the site around proof of work: clear value, then the projects',
+      'Designed a premium, minimal interface system with the cursive mark as the focal point',
+      'Wrote concise, honest copy that lets the work lead',
+      'Built the portfolio and case-study system on Next.js, Tailwind, and Vercel',
+      'Added a private Supabase-backed dashboard to manage projects behind the scenes',
     ],
     features: [
-      'Repeatable, premium design system',
-      'Conversion-first page structure',
-      'Fast, accessible, SEO-ready builds',
-      'Clear pricing and engagement model',
-      'AI-assisted build workflow for speed without sacrificing quality',
+      'Premium, minimal design system',
+      'Proof-of-work gallery with live previews',
+      'Strategic case-study pages',
+      'Fast, accessible, SEO-ready build',
+      'Private dashboard for managing projects',
     ],
     result:
-      'A studio identity that communicates trust and capability in seconds, with a build process that turns a discovery call into a launched, maintainable site clients can be proud of.',
+      'A personal site that communicates capability in seconds and makes my work easy to browse — with a build process and dashboard I reuse across every project.',
     accent_color: '#7c9a76',
     start_date: '2025-09-01',
     launch_date: '2026-01-10',
@@ -65,7 +65,7 @@ export const projects: Project[] = [
         id: 's-fbf-1',
         project_id: 'p-frames-by-frady',
         image_url: '/projects/frames-by-frady-1.png',
-        alt_text: 'Frames by Frady studio homepage',
+        alt_text: 'Personal portfolio homepage',
         sort_order: 1,
         created_at: now,
       },
@@ -641,12 +641,29 @@ const REPOS: Record<string, string | null> = {
   'bulk': `https://github.com/${GH_OWNER}/bulk`,
 };
 
+// Live GitHub Pages URLs — the deployed sites. These become each project's
+// live_url, so the preview screenshots the RENDERED page (not the repo).
+// Only fills in projects that don't already have a live_url (e.g. the
+// portfolio itself keeps its custom domain). Trailing slash matters for Pages.
+const PAGES: Record<string, string> = {
+  'thoy-lawncare': `https://${GH_OWNER}.github.io/THOY-lawncare/`,
+  'ari-website-concepts': `https://${GH_OWNER}.github.io/ARI/`,
+  'dow-scitechconnect': `https://${GH_OWNER}.github.io/SciTech-Connect/`,
+  'ram-rapid-acquisition-model': `https://${GH_OWNER}.github.io/RAM/`,
+  'heartland-bioworks': `https://${GH_OWNER}.github.io/HeartlandBioworks/`,
+  'bulk': `https://${GH_OWNER}.github.io/bulk/`,
+};
+
 for (const p of projects) {
   const mapped = REPOS[p.slug];
   if (mapped !== undefined) {
     p.repo_url = mapped;
   } else if (!p.repo_url) {
     p.repo_url = `https://github.com/${GH_OWNER}/${p.slug}`;
+  }
+
+  if (!p.live_url && PAGES[p.slug]) {
+    p.live_url = PAGES[p.slug];
   }
 }
 

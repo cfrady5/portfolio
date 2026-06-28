@@ -31,15 +31,15 @@ export const resume: ResumeData = {
       ],
     },
     {
-      role: 'Founder & Website Builder',
-      organization: 'Frames by Frady',
+      role: 'Freelance Web Designer & Developer',
+      organization: 'Independent',
       location: 'Remote',
       start: '2025',
       end: 'Present',
       summary:
-        'Founded a small-business website studio focused on clean, fast, conversion-minded sites for local and growing businesses.',
+        'Designed and built clean, fast, conversion-minded websites for local and growing organizations as an independent designer-developer.',
       highlights: [
-        'Designed a repeatable premium design system and engagement model.',
+        'Built a repeatable premium design system reused across projects.',
         'Built and shipped sites on Next.js, Vercel, and Wix Studio.',
         'Handled strategy, design, copywriting, development, and SEO end to end.',
         'Planned CMS structures so clients can maintain their own content.',

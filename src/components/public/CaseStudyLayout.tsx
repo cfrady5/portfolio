@@ -74,7 +74,7 @@ export function CaseStudyLayout({ project, nextProject }: CaseStudyLayoutProps) 
               </Button>
             )}
             <Button href="/contact" variant="secondary" size="md">
-              Work with me
+              Get in touch
             </Button>
           </div>
         </div>

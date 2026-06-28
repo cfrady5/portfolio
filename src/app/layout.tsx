@@ -13,14 +13,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://framesbyfrady.com';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Caleb Frady — Frames by Frady',
-    template: '%s · Frames by Frady',
+    default: 'Caleb Frady — Portfolio',
+    template: '%s · Caleb Frady',
   },
   description:
     'Websites, digital systems, and brand experiences built with clarity. Caleb Frady — finance graduate, digital communications specialist, and website builder.',
   keywords: [
     'Caleb Frady',
-    'Frames by Frady',
+    'frady',
     'website design',
     'web developer',
     'digital communications',
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
   creator: 'Caleb Frady',
   openGraph: {
     type: 'website',
-    title: 'Caleb Frady — Frames by Frady',
+    title: 'Caleb Frady — Portfolio',
     description:
       'Websites, digital systems, and brand experiences built with clarity.',
     url: siteUrl,
-    siteName: 'Frames by Frady',
+    siteName: 'Caleb Frady',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Caleb Frady — Frames by Frady',
+    title: 'Caleb Frady — Portfolio',
     description:
       'Websites, digital systems, and brand experiences built with clarity.',
   },

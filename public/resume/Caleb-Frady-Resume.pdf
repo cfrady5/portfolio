@@ -12,7 +12,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
 endobj
 5 0 obj
-<< /Length 167 >>
+<< /Length 150 >>
 stream
 BT
 /F1 24 Tf
@@ -20,7 +20,7 @@ BT
 (Caleb Frady) Tj
 /F1 12 Tf
 0 -28 Td
-(Frames by Frady - Placeholder Resume) Tj
+(Placeholder Resume) Tj
 0 -20 Td
 (Replace this file with your real resume PDF export.) Tj
 ET
@@ -37,5 +37,5 @@ xref
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-530
+515
 %%EOF

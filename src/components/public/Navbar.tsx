@@ -52,7 +52,7 @@ export function Navbar() {
             Login
           </Link>
           <Button href="/contact" size="sm">
-            Work With Me
+            Get in touch
           </Button>
         </div>
 
@@ -105,7 +105,7 @@ export function Navbar() {
             </Link>
             <div className="pt-2">
               <Button href="/contact" size="sm" className="w-full">
-                Work With Me
+                Get in touch
               </Button>
             </div>
           </div>

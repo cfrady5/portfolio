@@ -11,7 +11,7 @@ export function Hero() {
         </div>
 
         <div className="flex flex-col items-center gap-6 animate-fade-up">
-          <span className="eyebrow">Frames by Frady · Proof of work</span>
+          <span className="eyebrow">Caleb Frady · Proof of work</span>
           <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-bone sm:text-5xl md:text-6xl">
             Websites, digital systems, and brand experiences built with clarity.
           </h1>
@@ -37,7 +37,7 @@ export function Hero() {
             Download Resume
           </Button>
           <Button href="/contact" variant="ghost" size="lg">
-            Work With Me
+            Get in touch
           </Button>
         </div>
 

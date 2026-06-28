@@ -68,7 +68,7 @@ export function LoginForm() {
             Admin login
           </h1>
           <p className="mt-2 text-sm text-bone-soft">
-            Private dashboard for Frames by Frady.
+            Private dashboard.
           </p>
         </div>
       </div>

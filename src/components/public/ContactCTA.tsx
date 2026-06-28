@@ -26,7 +26,7 @@ export function ContactCTA() {
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row">
             <Button href="/contact" size="lg">
-              Start a Project
+              Get in touch
             </Button>
             <Button href="/work" variant="secondary" size="lg">
               See the Work
