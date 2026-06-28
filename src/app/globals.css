@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050505;
+  --foreground: #f4f1ea;
+}
+
+@layer base {
+  * {
+    border-color: theme('colors.line');
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  ::selection {
+    background-color: theme('colors.moss.700');
+    color: theme('colors.bone.DEFAULT');
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  /* Page width container */
+  .container-x {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8;
+  }
+
+  /* Muted green eyebrow label used above section headings */
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.18em] text-moss;
+  }
+
+  /* Subtle card surface used across public + dashboard */
+  .card {
+    @apply rounded-2xl border border-line bg-ink-800/60 backdrop-blur-sm;
+  }
+
+  .hairline {
+    @apply border-line;
+  }
+
+  /* Focus ring for accessibility */
+  .focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900;
+  }
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Subtle noise/grain-free premium background gradient helper */
+.bg-radial-fade {
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(124, 154, 118, 0.10) 0%, rgba(5, 5, 5, 0) 70%),
+    #050505;
+}
