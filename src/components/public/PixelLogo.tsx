@@ -12,12 +12,13 @@ import { LOGO_SRC } from './LogoMark';
 // to no-JS users, screen readers, and as the crisp final state). The canvas
 // overlay runs the animation on top, then fades out to reveal the vector.
 //
-// Plays once per session, respects prefers-reduced-motion, same-origin canvas
-// (no taint). Reads the same LOGO_SRC as the rest of the site.
+// Aspect-aware: `height` is fixed; width follows the logo's natural ratio, so
+// the wide cursive never squashes. Plays once per session, respects
+// prefers-reduced-motion, same-origin canvas (no taint).
 // ---------------------------------------------------------------------------
 
 const SESSION_KEY = 'frady-pixel-played';
-const RES = 512; // offscreen sampling resolution
+const RES_H = 512; // offscreen sampling height
 const DURATION = 1700; // ms for the full materialization
 const FADE = 0.16; // per-block fade-in fraction of the timeline
 const ACCENT = '#7c9a76';
@@ -27,17 +28,17 @@ let playedThisLoad = false;
 type Phase = 'idle' | 'animating' | 'done';
 
 export function PixelLogo({
-  size = 176,
+  height = 150,
   src = LOGO_SRC,
   className,
 }: {
-  size?: number;
+  height?: number;
   src?: string;
   className?: string;
 }) {
   const [phase, setPhase] = useState<Phase>('idle');
+  const [width, setWidth] = useState<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const imgElRef = useRef<HTMLImageElement | null>(null);
   const loadedImg = useRef<HTMLImageElement | null>(null);
 
   // Decide whether to animate, and preload the image.
@@ -62,6 +63,8 @@ export function PixelLogo({
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       loadedImg.current = img;
+      const aspect = img.naturalWidth / img.naturalHeight || 1;
+      setWidth(Math.round(height * aspect));
       playedThisLoad = true;
       try {
         sessionStorage.setItem(SESSION_KEY, '1');
@@ -72,18 +75,24 @@ export function PixelLogo({
     };
     img.onerror = () => setPhase('idle');
     img.src = src;
-  }, [src]);
+  }, [src, height]);
 
-  // Run the materialization once the canvas is mounted.
+  // Run the materialization once the canvas is mounted with known dimensions.
   useEffect(() => {
-    if (phase !== 'animating') return;
+    if (phase !== 'animating' || width == null) return;
     const canvas = canvasRef.current;
     const img = loadedImg.current;
     if (!canvas || !img) return;
 
+    const w = width;
+    const h = height;
+    const aspect = w / h;
+    const offW = Math.round(RES_H * aspect);
+    const offH = RES_H;
+
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = size * dpr;
-    canvas.height = size * dpr;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       setPhase('done');
@@ -93,35 +102,35 @@ export function PixelLogo({
 
     // Offscreen render of the logo for sampling + block sources.
     const off = document.createElement('canvas');
-    off.width = RES;
-    off.height = RES;
+    off.width = offW;
+    off.height = offH;
     const offCtx = off.getContext('2d');
     if (!offCtx) {
       setPhase('done');
       return;
     }
-    offCtx.drawImage(img, 0, 0, RES, RES);
+    offCtx.drawImage(img, 0, 0, offW, offH);
 
     let data: Uint8ClampedArray | null = null;
     try {
-      data = offCtx.getImageData(0, 0, RES, RES).data;
+      data = offCtx.getImageData(0, 0, offW, offH).data;
     } catch {
       data = null; // tainted (shouldn't happen same-origin) — skip ink test
     }
 
     // Build the grid of "ink" blocks (skip transparent areas).
-    const block = Math.max(4, Math.round(size / 42));
-    const scale = RES / size;
+    const block = Math.max(4, Math.round(h / 42));
+    const scale = offH / h;
     type Blk = { x: number; y: number; sx: number; sy: number; ss: number; start: number };
     const blocks: Blk[] = [];
-    for (let y = 0; y < size; y += block) {
-      for (let x = 0; x < size; x += block) {
+    for (let y = 0; y < h; y += block) {
+      for (let x = 0; x < w; x += block) {
         const sx = Math.floor(x * scale);
         const sy = Math.floor(y * scale);
         if (data) {
-          const cx = Math.min(RES - 1, sx + Math.floor((block * scale) / 2));
-          const cy = Math.min(RES - 1, sy + Math.floor((block * scale) / 2));
-          const alpha = data[(cy * RES + cx) * 4 + 3];
+          const cx = Math.min(offW - 1, sx + Math.floor((block * scale) / 2));
+          const cy = Math.min(offH - 1, sy + Math.floor((block * scale) / 2));
+          const alpha = data[(cy * offW + cx) * 4 + 3];
           if (alpha < 40) continue; // transparent -> not part of the word
         }
         blocks.push({
@@ -130,8 +139,7 @@ export function PixelLogo({
           sx,
           sy,
           ss: Math.ceil(block * scale),
-          // scatter the reveal across the timeline for a digital materialize
-          start: Math.random() * (1 - FADE),
+          start: Math.random() * (1 - FADE), // scatter across the timeline
         });
       }
     }
@@ -141,7 +149,7 @@ export function PixelLogo({
 
     const frame = (now: number) => {
       const t = Math.min((now - t0) / DURATION, 1);
-      ctx.clearRect(0, 0, size, size);
+      ctx.clearRect(0, 0, w, h);
       for (const b of blocks) {
         const local = Math.min(Math.max((t - b.start) / FADE, 0), 1);
         if (local <= 0) continue;
@@ -163,25 +171,24 @@ export function PixelLogo({
 
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [phase, size]);
+  }, [phase, width, height]);
 
   const animating = phase === 'animating';
 
   return (
     <div
       className={className}
-      style={{ position: 'relative', width: size, height: size }}
+      style={{ position: 'relative', height, width: width ?? 'auto' }}
     >
-      {/* Base / final layer: the crisp vector logo (accessible, no-JS safe). */}
+      {/* Base / final layer: the crisp logo (accessible, no-JS safe). */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        ref={imgElRef}
         src={src}
         alt="Caleb Frady — frady logo"
-        width={size}
-        height={size}
-        className="h-full w-full object-contain"
+        className="object-contain"
         style={{
+          height,
+          width: 'auto',
           opacity: animating ? 0 : 1,
           transition: 'opacity 350ms ease',
         }}
@@ -189,15 +196,15 @@ export function PixelLogo({
       />
 
       {/* Animation overlay. */}
-      {phase !== 'idle' && (
+      {phase !== 'idle' && width != null && (
         <canvas
           ref={canvasRef}
           aria-hidden
           style={{
             position: 'absolute',
             inset: 0,
-            width: size,
-            height: size,
+            width,
+            height,
             opacity: phase === 'done' ? 0 : 1,
             transition: 'opacity 350ms ease',
             pointerEvents: 'none',

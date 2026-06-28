@@ -1,32 +1,24 @@
 # Brand assets
 
-## Replace the logo with your real file
+## Current logo
 
-The site currently ships with `frady-logo.svg` — a placeholder that mirrors
-your real mark (black circle, white cursive "frady").
+`frady-logo.png` — the white cursive **frady** mark on a transparent field
+(5000×2813, ~16:9). It's the live brand mark across the whole site and is read
+from a single constant: `LOGO_SRC` in `src/components/public/LogoMark.tsx`.
 
-To use your real logo everywhere on the site:
+## Replacing it
 
-1. Add your real file here as **`frady-logo.png`** (the path the project expects).
-2. Open `src/components/public/LogoMark.tsx` and change:
+1. Drop your new file in as **`frady-logo.png`** (same name).
+2. If your file has a different shape, update **`LOGO_ASPECT`** (width ÷ height)
+   in `src/components/public/LogoMark.tsx` so it doesn't squash.
 
-   ```ts
-   const LOGO_SRC = '/brand/frady-logo.svg';
-   ```
-
-   to:
-
-   ```ts
-   const LOGO_SRC = '/brand/frady-logo.png';
-   ```
-
-That single constant feeds the navbar, footer, login page, dashboard sidebar,
-portfolio hero, and contact CTA.
+That feeds the navbar, footer, login, dashboard sidebar, contact CTA, and the
+hero pixel-materialization animation.
 
 ## Favicon & social preview
 
-- `src/app/icon.svg` is the favicon/app icon.
-- `src/app/opengraph-image.tsx` generates the social/Open Graph preview.
+- `src/app/icon.svg` — favicon/app icon (kept as a filled mark so it stays
+  visible on light browser tabs).
+- `src/app/opengraph-image.tsx` — generated social/Open Graph preview.
 
-Both reference the same mark. If you want them to use your PNG, swap the file
-references there too (comments mark the spot).
+`frady-logo.svg` is an unused white-cursive fallback; safe to delete.

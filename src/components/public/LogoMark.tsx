@@ -5,16 +5,21 @@ import { cn } from '@/lib/utils';
 // ---------------------------------------------------------------------------
 // LogoMark — the single source of truth for the brand logo across the site.
 //
-// >>> To use your real logo: drop /public/brand/frady-logo.png and change
-//     LOGO_SRC below to '/brand/frady-logo.png'. That's it — navbar, footer,
-//     login, dashboard sidebar, hero, and contact CTA all read from here.
+// The mark is the white cursive "frady" on a transparent field. `size` is the
+// rendered HEIGHT; width follows LOGO_ASPECT so the wide cursive never squashes.
+//
+// >>> To swap the logo: replace /public/brand/frady-logo.png and, if your file
+//     has a different shape, update LOGO_ASPECT (width / height). Everything —
+//     navbar, footer, login, dashboard sidebar, hero animation, contact CTA —
+//     reads from here.
 // ---------------------------------------------------------------------------
-export const LOGO_SRC = '/brand/frady-logo.svg';
+export const LOGO_SRC = '/brand/frady-logo.png';
+export const LOGO_ASPECT = 5000 / 2813; // ≈ 1.78 (width / height) of frady-logo.png
 
 interface LogoMarkProps {
-  /** Pixel size of the circular mark. */
+  /** Rendered height of the mark in pixels (width follows the logo aspect). */
   size?: number;
-  /** Show the "Caleb Frady" wordmark beside the circle. */
+  /** Show the "Caleb Frady" wordmark beside the mark. */
   withWordmark?: boolean;
   /** Wrap in a link to a destination (defaults to '/'). Pass null to disable. */
   href?: string | null;
@@ -35,11 +40,10 @@ export function LogoMark({
       <Image
         src={LOGO_SRC}
         alt="Caleb Frady logo"
-        width={size}
+        width={Math.round(size * LOGO_ASPECT)}
         height={size}
         priority
-        className="rounded-full"
-        style={{ width: size, height: size }}
+        className="object-contain"
       />
       {withWordmark && (
         <span className="flex flex-col leading-tight">
@@ -62,7 +66,7 @@ export function LogoMark({
     <Link
       href={href}
       aria-label="Caleb Frady — home"
-      className={cn('inline-flex focus-ring rounded-full', className)}
+      className={cn('inline-flex focus-ring rounded-md', className)}
     >
       {mark}
     </Link>
