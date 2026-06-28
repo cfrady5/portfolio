@@ -42,9 +42,6 @@ export const metadata: Metadata = {
     description:
       'Websites, digital systems, and brand experiences built with clarity.',
   },
-  icons: {
-    icon: '/icon.svg',
-  },
 };
 
 export default function RootLayout({

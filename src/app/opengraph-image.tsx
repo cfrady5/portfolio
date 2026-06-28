@@ -1,13 +1,22 @@
 import { ImageResponse } from 'next/og';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
-// Open Graph / social preview image, generated at the edge.
-// Mirrors the brand: black field, off-white type, muted green accent.
-export const runtime = 'edge';
+// Open Graph / social preview image. Rendered with the Node runtime so we can
+// read the real logo from disk and embed it. Brand: black field, off-white
+// type, muted green accent, the white cursive frady mark.
+export const runtime = 'nodejs';
 export const alt = 'Caleb Frady — Portfolio';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  // Embed the actual logo as a data URL.
+  const logoData = await readFile(
+    join(process.cwd(), 'public/brand/frady-logo.png'),
+  );
+  const logoSrc = `data:image/png;base64,${logoData.toString('base64')}`;
+
   return new ImageResponse(
     (
       <div
@@ -18,39 +27,27 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           backgroundColor: '#050505',
+          backgroundImage:
+            'radial-gradient(60% 60% at 50% 0%, rgba(124,154,118,0.14) 0%, rgba(5,5,5,0) 70%)',
           padding: '80px',
           color: '#f4f1ea',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-          {/* Brand mark stand-in (circle + cursive). Replace with your PNG if preferred. */}
-          <div
-            style={{
-              width: 96,
-              height: 96,
-              borderRadius: 9999,
-              backgroundColor: '#0a0a0a',
-              border: '1px solid rgba(244,241,234,0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 52,
-              fontStyle: 'italic',
-            }}
-          >
-            f
-          </div>
-          <div style={{ fontSize: 28, letterSpacing: 2, color: '#7c9a76' }}>
-            CALEB FRADY
-          </div>
+        <div style={{ display: 'flex' }}>
+          {/* Real white cursive frady logo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logoSrc} alt="" height={150} style={{ height: 150 }} />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ fontSize: 64, lineHeight: 1.05, maxWidth: 900 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+          <div style={{ fontSize: 26, letterSpacing: 3, color: '#7c9a76' }}>
+            CALEB FRADY · PORTFOLIO
+          </div>
+          <div style={{ fontSize: 62, lineHeight: 1.05, maxWidth: 950 }}>
             Websites, digital systems, and brand experiences built with clarity.
           </div>
-          <div style={{ fontSize: 30, color: '#a3a09a' }}>
-            Caleb Frady — finance graduate, communications specialist, website builder.
+          <div style={{ fontSize: 28, color: '#a3a09a' }}>
+            Finance graduate, communications specialist, website builder.
           </div>
         </div>
       </div>
