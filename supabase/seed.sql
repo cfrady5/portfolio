@@ -56,29 +56,11 @@ values
    'A growing biotech initiative had scattered content and no clear structure.',
    'A coherent, maintainable site structure the team can keep current.', '#5a8f7b', '2026-09-15'),
 
-  ('bizzabo-event-pages', '11111111-1111-1111-1111-111111111103', 'Bizzabo Event Pages', 'Client Work',
-   'Formal event landing pages for government, defense, and innovation events — agenda, registration, speakers, and venue.',
-   'Designer, event page builder, copy/layout editor', '{Bizzabo,HTML,CSS,Claude}', 'Active', null, false, true, '2025', 'Government / Defense',
-   'Event pages are often cluttered and hard to scan, costing registrations.',
-   'Event pages that are easy to scan and act on, helping events fill seats.', '#7a6f9c', null),
-
   ('bulk', null, 'Bulk', 'Apps',
    'A mobile app concept for bulk sports-card listing — photo intake, item review, CSV generation, and marketplace efficiency.',
    'Product designer, app strategist, brand direction', '{Claude,"Mobile UI concepts","Workflow design"}', 'Concept', null, true, true, '2025', 'Product Concept',
    'Listing sports cards in volume is slow and error-prone.',
-   'A concept that could collapse hours of manual listing into a fast, repeatable workflow.', '#c08a3e', null),
-
-  ('irc-indiana-research-consortium', null, 'IRC — Indiana Research Consortium', 'Brand Identity',
-   'A clean logo and visual identity concept built around the state of Indiana, university markers, and a simple institutional identity.',
-   'Brand designer', '{"AI image generation","Design direction"}', 'Concept', null, false, true, '2025', 'Research Consortium',
-   'A multi-institution consortium needs a single identity that feels neutral, credible, and shared.',
-   'A clean, credible identity concept a multi-institution consortium could adopt.', '#8a6f4a', null),
-
-  ('sketchbook-stoic', null, 'Sketchbook Stoic', 'Concepts',
-   'A motivational content concept built around short-form wisdom slides, visual storytelling, and recurring content systems.',
-   'Concept creator, content strategist', '{"AI content workflow","Visual direction"}', 'Concept', null, false, true, '2025', 'Content Brand',
-   'Most motivational content is inconsistent and forgettable without a system.',
-   'A content system that makes a recognizable, sustainable motivational brand possible.', '#9c8f6f', null)
+   'A concept that could collapse hours of manual listing into a fast, repeatable workflow.', '#c08a3e', null)
 on conflict (slug) do nothing;
 
 -- --- Financials (placeholder values — PRIVATE) -----------------------------
