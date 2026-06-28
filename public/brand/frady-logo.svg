@@ -1,24 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="frady">
   <!--
-    PLACEHOLDER BRAND MARK.
-    This is a stand-in that mirrors the real logo: a black circle with the
-    white lowercase cursive word "frady".
+    PLACEHOLDER BRAND MARK — white cursive "frady" on a transparent field.
+    Mirrors the white logo provided. Looks crisp on the dark site.
 
-    >>> To use your real logo:
+    >>> To use your real white logo:
         1. Drop your file in /public/brand/frady-logo.png
         2. Open src/components/public/LogoMark.tsx and set LOGO_SRC to
            '/brand/frady-logo.png'
-    Everything across the site (navbar, footer, login, dashboard, favicon,
-    OG image) reads from that single constant.
+    Everything (navbar, footer, login, dashboard sidebar, hero animation,
+    contact CTA) reads from that single constant.
   -->
-  <circle cx="256" cy="256" r="256" fill="#0a0a0a" />
   <text
     x="256"
-    y="300"
+    y="312"
     text-anchor="middle"
     font-family="'Snell Roundhand','Brush Script MT','Segoe Script',cursive"
-    font-size="190"
+    font-size="210"
     font-style="italic"
-    fill="#f4f1ea"
+    fill="#ffffff"
   >frady</text>
 </svg>

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { SiteFrame } from '@/components/public/SiteFrame';
-import { BrandIntro } from '@/components/public/BrandIntro';
 import { Hero } from '@/components/public/Hero';
 import { SectionHeading } from '@/components/public/SectionHeading';
 import { ProjectCard } from '@/components/public/ProjectCard';
@@ -35,9 +34,6 @@ export default async function HomePage() {
 
   return (
     <SiteFrame>
-      {/* One-time draw-on intro of the cursive frady mark */}
-      <BrandIntro />
-
       {/* 2. Hero */}
       <Hero />
 
