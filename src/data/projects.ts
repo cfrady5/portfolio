@@ -17,6 +17,93 @@ const now = '2026-01-15T00:00:00.000Z';
 
 export const projects: Project[] = [
   {
+    id: 'p-nyc-by-ma',
+    client_id: null,
+    title: 'NYC by MA',
+    slug: 'nyc-by-ma',
+    category: 'Websites',
+    // TODO: refine this copy with the real project details.
+    short_description:
+      'A clean, modern website for NYC by MA — built to present the brand clearly and turn visitors into action.',
+    long_description:
+      'NYC by MA is a website built to give the brand a credible, easy-to-navigate home online. The focus is clarity and trust: a strong first impression, a clear story, and a simple path to the next step — designed and built end to end.',
+    role: 'Designer, developer',
+    tools: ['Next.js', 'Tailwind', 'Vercel', 'Claude'],
+    status: 'Active',
+    // TODO: add the live site + repo. Leave null for now — the card shows the
+    // placeholder mockup until a live_url is set (then it auto-screenshots it).
+    live_url: null,
+    repo_url: null,
+    featured: true,
+    public_visible: true,
+    year: '2026',
+    client_type: 'Client',
+    problem:
+      'NYC by MA needed a polished web presence that communicates the brand clearly and gives visitors an obvious next step.',
+    process: [
+      'Clarified the brand, audience, and the single most important action',
+      'Structured the page around a strong first impression and clear story',
+      'Designed a clean, modern interface',
+      'Wrote concise, on-brand copy',
+      'Built and deployed the site',
+    ],
+    features: [
+      'Strong, clear first impression',
+      'Modern, responsive layout',
+      'Conversion-focused call to action',
+      'Fast, accessible build',
+    ],
+    result:
+      'A credible, modern web presence that makes the brand easy to understand and easy to act on.',
+    accent_color: '#c2554d',
+    start_date: '2026-02-01',
+    launch_date: null,
+    renewal_date: null,
+    created_at: now,
+    updated_at: now,
+    screenshots: [
+      {
+        id: 's-nyc-1',
+        project_id: 'p-nyc-by-ma',
+        image_url: '/projects/nyc-by-ma-1.png',
+        alt_text: 'NYC by MA homepage',
+        sort_order: 1,
+        created_at: now,
+      },
+    ],
+    financials: {
+      id: 'f-nyc-by-ma',
+      project_id: 'p-nyc-by-ma',
+      initial_build_price: 0,
+      deposit_amount: 0,
+      final_payment_amount: 0,
+      total_project_price: 0,
+      monthly_hosting_fee: 0,
+      monthly_maintenance_fee: 0,
+      monthly_seo_fee: 0,
+      monthly_content_fee: 0,
+      other_recurring_fee: 0,
+      total_monthly_recurring: 0,
+      amount_paid_to_date: 0,
+      outstanding_balance: 0,
+      payment_status: 'N/A',
+      contract_status: 'None',
+      created_at: now,
+      updated_at: now,
+    },
+    notes: [
+      {
+        id: 'n-nyc-1',
+        project_id: 'p-nyc-by-ma',
+        note: 'New project. Add real URL, screenshots, and finalized copy.',
+        next_action: 'Add live URL + screenshots',
+        priority: 'High',
+        created_at: now,
+        updated_at: now,
+      },
+    ],
+  },
+  {
     id: 'p-frames-by-frady',
     client_id: null,
     title: 'Personal Portfolio',
@@ -632,6 +719,8 @@ export const projects: Project[] = [
 export const GH_OWNER = 'cfrady5';
 
 const REPOS: Record<string, string | null> = {
+  // TODO: set the real repo/Pages URL for NYC by MA (null = no link for now).
+  'nyc-by-ma': null,
   'frames-by-frady': `https://github.com/${GH_OWNER}/frames-by-frady`,
   'thoy-lawncare': `https://github.com/${GH_OWNER}/THOY-lawncare`,
   'ari-website-concepts': `https://github.com/${GH_OWNER}/ARI`,

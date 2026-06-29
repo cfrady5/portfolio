@@ -1,12 +1,12 @@
 import { Button } from './Button';
-import { PixelLogo } from './PixelLogo';
+import { HeroWordmark } from './HeroWordmark';
 
 export function Hero() {
   return (
     <section className="bg-radial-fade relative overflow-hidden">
       <div className="container-x relative flex flex-col items-center gap-10 py-24 text-center sm:py-32">
-        {/* Portfolio hero branding — the cursive mark "digitalizes" in pixel by pixel */}
-        <PixelLogo height={150} />
+        {/* Portfolio hero branding — the word "frady" assembles letter by letter */}
+        <HeroWordmark />
 
         <div className="flex flex-col items-center gap-6 animate-fade-up">
           <span className="eyebrow">Caleb Frady · Proof of work</span>
