@@ -20,8 +20,8 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink-950/80 backdrop-blur-md">
-      <nav className="container-x flex h-16 items-center justify-between">
-        <LogoMark size={30} />
+      <nav className="container-x flex h-20 items-center justify-between">
+        <LogoMark size={52} />
 
         <div className="hidden items-center gap-1 md:flex">
           {links.map((link) => {
