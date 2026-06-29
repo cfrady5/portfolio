@@ -30,9 +30,7 @@ export const projects: Project[] = [
     role: 'Designer, developer',
     tools: ['Next.js', 'Tailwind', 'Vercel', 'Claude'],
     status: 'Active',
-    // TODO: add the live site + repo. Leave null for now — the card shows the
-    // placeholder mockup until a live_url is set (then it auto-screenshots it).
-    live_url: null,
+    live_url: 'https://nyc-by-ma.com',
     repo_url: null,
     featured: true,
     public_visible: true,
@@ -116,7 +114,7 @@ export const projects: Project[] = [
     role: 'Designer, developer, copywriter',
     tools: ['Next.js', 'TypeScript', 'Tailwind', 'Supabase', 'Vercel', 'Claude'],
     status: 'Active',
-    live_url: 'https://framesbyfrady.com',
+    live_url: 'https://frames-by-frady-eight.vercel.app',
     repo_url: null,
     featured: true,
     public_visible: true,

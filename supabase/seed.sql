@@ -22,13 +22,13 @@ insert into public.projects
 values
   ('nyc-by-ma', null, 'NYC by MA', 'Websites',
    'A clean, modern website for NYC by MA — built to present the brand clearly and turn visitors into action.',
-   'Designer, developer', '{Next.js,Tailwind,Vercel,Claude}', 'Active', null, true, true, '2026', 'Client',
+   'Designer, developer', '{Next.js,Tailwind,Vercel,Claude}', 'Active', 'https://nyc-by-ma.com', true, true, '2026', 'Client',
    'NYC by MA needed a polished web presence that communicates the brand clearly and gives visitors an obvious next step.',
    'A credible, modern web presence that makes the brand easy to understand and easy to act on.', '#c2554d', null),
 
   ('frames-by-frady', null, 'Personal Portfolio', 'Websites',
    'My personal portfolio and proof-of-work site — a place to show the websites, apps, and brands I have built, many of them with Claude.',
-   'Designer, developer, copywriter', '{Next.js,TypeScript,Tailwind,Supabase,Vercel,Claude}', 'Active', 'https://framesbyfrady.com', true, true, '2026', 'Personal',
+   'Designer, developer, copywriter', '{Next.js,TypeScript,Tailwind,Supabase,Vercel,Claude}', 'Active', 'https://frames-by-frady-eight.vercel.app', true, true, '2026', 'Personal',
    'I needed one credible home for my work that reads clearly and is easy to keep current.',
    'A personal site that communicates capability in seconds and makes my work easy to browse.', '#7c9a76', null),
 

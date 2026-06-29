@@ -12,9 +12,10 @@ import { cn } from '@/lib/utils';
 // respects prefers-reduced-motion.
 // ---------------------------------------------------------------------------
 
-const SESSION_KEY = 'frady-pixel-played';
-const RES_H = 480; // offscreen sampling height
+const RES_H = 600; // offscreen sampling height (higher = more faithful)
 const MAX_W = 1600; // cap the canvas width
+// Replays on every full page refresh (module flag only prevents replaying on
+// client-side navigations within the same page load).
 let playedThisLoad = false;
 
 const easeOut = (p: number) => 1 - Math.pow(1 - p, 3);
@@ -34,24 +35,13 @@ export function HeroWordmark({ className }: { className?: string }) {
     const prefersReduced = window.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     ).matches;
-    let already = playedThisLoad;
-    try {
-      if (sessionStorage.getItem(SESSION_KEY)) already = true;
-    } catch {
-      /* ignore */
-    }
-    if (prefersReduced || already) return; // static logo stays
+    if (prefersReduced || playedThisLoad) return; // static logo stays
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       loaded.current = img;
       playedThisLoad = true;
-      try {
-        sessionStorage.setItem(SESSION_KEY, '1');
-      } catch {
-        /* ignore */
-      }
       setPhase('animating');
     };
     img.onerror = () => setPhase('idle');
@@ -100,7 +90,7 @@ export function HeroWordmark({ className }: { className?: string }) {
       data = null;
     }
 
-    const block = Math.max(4, Math.round(wordH / 30));
+    const block = Math.max(3, Math.round(wordH / 46));
     const sample = RES_H / wordH;
     const offX = (fullW - wordW) / 2; // centre the word in the canvas
     const offY = (H - wordH) / 2;
