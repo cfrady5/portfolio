@@ -5,8 +5,9 @@ import { SectionHeading } from '@/components/public/SectionHeading';
 import { ProjectCard } from '@/components/public/ProjectCard';
 import { SkillPill } from '@/components/public/SkillPill';
 import { ContactCTA } from '@/components/public/ContactCTA';
+import { LiveSitesMarquee } from '@/components/public/LiveSitesMarquee';
 import { Button } from '@/components/public/Button';
-import { getFeaturedProjects, getPublicProjects } from '@/data';
+import { getFeaturedProjects } from '@/data';
 import { resume } from '@/data/resume';
 
 const buildOfferings = [
@@ -30,7 +31,6 @@ const buildOfferings = [
 
 export default async function HomePage() {
   const featured = await getFeaturedProjects();
-  const allPublic = await getPublicProjects();
 
   return (
     <SiteFrame>
@@ -83,17 +83,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 5. Proof of Work / Gallery Preview */}
-      <section className="container-x py-20">
-        <SectionHeading
-          eyebrow="Gallery preview"
-          title="Websites that make organizations easier to understand"
-          description="From local business sites to government and innovation ecosystems — a growing body of work built with my name on it."
-        />
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {allPublic.slice(0, 3).map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+      {/* 5. Live sites — scrolling, clickable showcase of real deployed work */}
+      <section className="overflow-hidden py-20">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Live sites"
+            title="Real work, live — click any to open it"
+            description="A scrolling look at sites I've built and shipped, from organizations and government to innovation ecosystems and events. Hover to pause, click to visit."
+          />
+        </div>
+        <div className="mt-12">
+          <LiveSitesMarquee />
         </div>
       </section>
 
